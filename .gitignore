@@ -1,0 +1,18 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (if you add build tools later)
+node_modules/
+.env
+
+# Media files (optional - uncomment if you want to track audio)
+# *.mp3
+# *.wav
+# *.flac

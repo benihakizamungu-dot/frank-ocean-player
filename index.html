@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frank Ocean Player - Channel Orange & Blonde</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .player-card {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .player-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 15px 50px rgba(255, 107, 107, 0.3);
+        }
+
+        .album-art {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+            object-fit: cover;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h2 {
+            margin: 15px 0 5px 0;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .artist {
+            color: #b3b3b3;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .album {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .track-select {
+            width: 100%;
+            padding: 12px;
+            background: #333;
+            color: white;
+            border: 2px solid #555;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .track-select:hover {
+            border-color: #ff6b6b;
+        }
+
+        .track-select:focus {
+            outline: none;
+            border-color: #ff6b6b;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 15px;
+            height: 40px;
+        }
+
+        audio::-webkit-media-controls-panel {
+            background-color: #2a2a2a;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #ff5252;
+        }
+
+        button:active {
+            background: #e63946;
+        }
+
+        .info {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #aaa;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🎵 Frank Ocean Player</h1>
+        <p>Channel Orange & Blonde</p>
+    </div>
+
+    <!-- CHANNEL ORANGE PLAYER -->
+    <div class="player-card">
+        <img class="album-art" id="art-channel" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" alt="Channel Orange">
+        
+        <h2 id="song-title-channel">Thinkin Bout You</h2>
+        <p class="artist">Frank Ocean</p>
+        <p class="album">Channel Orange (2012)</p>
+
+        <select id="track-select-channel" class="track-select" onchange="changeTrack('channel')">
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Thinkin Bout You</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Pink + White</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Novacane</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Super Rich Kids</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Pyramid</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Sweet Life</option>
+        </select>
+
+        <audio id="audio-player-channel" controls></audio>
+
+        <div class="controls">
+            <button onclick="playPause('channel')">Play/Pause</button>
+            <button onclick="stopTrack('channel')">Stop</button>
+        </div>
+
+        <div class="info">
+            <p>💿 Now Playing on Channel Orange Player</p>
+        </div>
+    </div>
+
+    <!-- BLONDE PLAYER -->
+    <div class="player-card">
+        <img class="album-art" id="art-blonde" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" alt="Blonde">
+        
+        <h2 id="song-title-blonde">Nikes</h2>
+        <p class="artist">Frank Ocean</p>
+        <p class="album">Blonde (2016)</p>
+
+        <select id="track-select-blonde" class="track-select" onchange="changeTrack('blonde')">
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Nikes</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Ivy</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Pink + White</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Skyline To</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Self Control</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Nights</option>
+        </select>
+
+        <audio id="audio-player-blonde" controls></audio>
+
+        <div class="controls">
+            <button onclick="playPause('blonde')">Play/Pause</button>
+            <button onclick="stopTrack('blonde')">Stop</button>
+        </div>
+
+        <div class="info">
+            <p>💿 Now Playing on Blonde Player</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    const players = {
+        channel: {
+            audio: document.getElementById('audio-player-channel'),
+            select: document.getElementById('track-select-channel'),
+            title: document.getElementById('song-title-channel'),
+            art: document.getElementById('art-channel')
+        },
+        blonde: {
+            audio: document.getElementById('audio-player-blonde'),
+            select: document.getElementById('track-select-blonde'),
+            title: document.getElementById('song-title-blonde'),
+            art: document.getElementById('art-blonde')
+        }
+    };
+
+    function changeTrack(album) {
+        const player = players[album];
+        const selectedOption = player.select.options[player.select.selectedIndex];
+        const url = selectedOption.value;
+        const albumUrl = selectedOption.dataset.album;
+        
+        player.audio.src = url;
+        player.title.innerText = selectedOption.text;
+        player.art.src = albumUrl;
+        player.audio.play();
+    }
+
+    function playPause(album) {
+        const audio = players[album].audio;
+        if (audio.paused) {
+            audio.play();
+        } else {
+            audio.pause();
+        }
+    }
+
+    function stopTrack(album) {
+        const audio = players[album].audio;
+        audio.pause();
+        audio.currentTime = 0;
+    }
+
+    // Load first tracks on start
+    window.onload = () => {
+        players.channel.audio.src = players.channel.select.value;
+        players.blonde.audio.src = players.blonde.select.value;
+    };
+</script>
+
+</body>
+</html>
