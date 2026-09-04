@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frank Ocean Player - Channel Orange & Blonde</title>
+    <title>Music Player - Download & Play</title>
     <style>
         * {
             margin: 0;
@@ -113,30 +113,55 @@
             color: #1db954;
         }
 
-        .spotify-button {
+        .player-controls {
+            margin: 20px 0;
+        }
+
+        audio {
             width: 100%;
+            height: 50px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            flex: 1;
             padding: 12px;
             background: #1db954;
             color: white;
             border: none;
-            border-radius: 25px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 14px;
-            text-transform: uppercase;
             transition: background 0.3s ease, transform 0.2s ease;
-            margin-bottom: 10px;
-            text-decoration: none;
-            display: inline-block;
         }
 
-        .spotify-button:hover {
+        button:hover {
             background: #1ed760;
             transform: scale(1.02);
         }
 
-        .spotify-button:active {
+        button:active {
             background: #1aa34a;
+        }
+
+        .download-btn {
+            background: #ff6b6b;
+        }
+
+        .download-btn:hover {
+            background: #ff5252;
+        }
+
+        .download-btn:active {
+            background: #e63946;
         }
 
         .info {
@@ -168,13 +193,25 @@
             font-size: 14px;
         }
 
-        a {
-            color: #1db954;
-            text-decoration: none;
+        .progress-bar {
+            background: #333;
+            height: 6px;
+            border-radius: 3px;
+            margin: 10px 0;
+            overflow: hidden;
         }
 
-        a:hover {
-            text-decoration: underline;
+        .progress-fill {
+            height: 100%;
+            background: #1db954;
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        .time-display {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 8px;
         }
     </style>
 </head>
@@ -182,69 +219,97 @@
 
 <div class="container">
     <div class="header">
-        <h1>🎵 Frank Ocean Player</h1>
-        <p>Channel Orange & Blonde - Official Spotify Tracks</p>
+        <h1>🎵 Music Player</h1>
+        <p>Download & Play Audio Files</p>
     </div>
 
-    <!-- CHANNEL ORANGE PLAYER -->
+    <!-- ALBUM 1 PLAYER -->
     <div class="player-card">
-        <img class="album-art" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" alt="Channel Orange">
+        <img class="album-art" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" alt="Album 1">
         
-        <h2>Channel Orange</h2>
-        <p class="artist">Frank Ocean</p>
-        <p class="album">🎼 2012 - Def Jam</p>
+        <h2>Royalty-Free Collection Vol. 1</h2>
+        <p class="artist">Various Artists</p>
+        <p class="album">🎼 Original Music</p>
 
-        <select id="track-select-channel" class="track-select" onchange="updateTrack('channel')">
-            <option value="https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqV" data-name="Thinkin Bout You" data-duration="3:39">Thinkin Bout You</option>
-            <option value="https://open.spotify.com/track/0c6xIDDpzE81m2GFRMO6R8" data-name="Pink + White" data-duration="4:41">Pink + White</option>
-            <option value="https://open.spotify.com/track/1HEe2s59jJuChqRw0oMpAL" data-name="Novacane" data-duration="3:51">Novacane</option>
-            <option value="https://open.spotify.com/track/5Q6rlYaDUFJ53I35XDQQH8" data-name="Super Rich Kids" data-duration="3:16">Super Rich Kids</option>
-            <option value="https://open.spotify.com/track/1KPSTLI3SPbhEZlpP4Ld7i" data-name="Pyramid" data-duration="4:56">Pyramid</option>
-            <option value="https://open.spotify.com/track/0DiWzAFbZxrclsH5QTZt7G" data-name="Sweet Life" data-duration="3:21">Sweet Life</option>
+        <select id="track-select-album1" class="track-select" onchange="updateTrack('album1')">
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" data-name="Epic Journey" data-artist="Various Artists" data-duration="3:39">Epic Journey</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" data-name="Digital Dreams" data-artist="Various Artists" data-duration="4:41">Digital Dreams</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" data-name="Sunset Vibes" data-artist="Various Artists" data-duration="3:51">Sunset Vibes</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" data-name="Ocean Waves" data-artist="Various Artists" data-duration="3:16">Ocean Waves</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" data-name="Mountain High" data-artist="Various Artists" data-duration="4:56">Mountain High</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" data-name="Night Falls" data-artist="Various Artists" data-duration="3:21">Night Falls</option>
         </select>
 
         <div class="track-info">
-            <strong id="track-name-channel">Thinkin Bout You</strong><br>
-            <span id="track-duration-channel">3:39</span>
+            <strong id="track-name-album1">Epic Journey</strong><br>
+            <span id="track-artist-album1">Various Artists</span>
         </div>
 
-        <a class="spotify-button" id="spotify-link-channel" href="https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqV" target="_blank">
-            🎧 Listen on Spotify
-        </a>
+        <div class="player-controls">
+            <audio id="audio-player-album1" controls></audio>
+            
+            <div class="progress-bar">
+                <div id="progress-fill-album1" class="progress-fill"></div>
+            </div>
+            
+            <div class="time-display">
+                <span id="current-time-album1">0:00</span> / <span id="duration-album1">0:00</span>
+            </div>
+
+            <div class="button-group">
+                <button onclick="playTrack('album1')">▶ Play</button>
+                <button onclick="pauseTrack('album1')">⏸ Pause</button>
+                <button class="download-btn" onclick="downloadTrack('album1')">⬇ Download</button>
+            </div>
+        </div>
 
         <div class="info">
-            💚 Official track links powered by Spotify
+            🎵 Play, download, and enjoy royalty-free music
         </div>
     </div>
 
-    <!-- BLONDE PLAYER -->
+    <!-- ALBUM 2 PLAYER -->
     <div class="player-card">
-        <img class="album-art" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" alt="Blonde">
+        <img class="album-art" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" alt="Album 2">
         
-        <h2>Blonde</h2>
-        <p class="artist">Frank Ocean</p>
-        <p class="album">🎼 2016 - Boys Don't Cry</p>
+        <h2>Royalty-Free Collection Vol. 2</h2>
+        <p class="artist">Various Artists</p>
+        <p class="album">🎼 Original Music</p>
 
-        <select id="track-select-blonde" class="track-select" onchange="updateTrack('blonde')">
-            <option value="https://open.spotify.com/track/0e7IGfKKbEKPBF2LqURccL" data-name="Nikes" data-duration="4:34">Nikes</option>
-            <option value="https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXjH" data-name="Ivy" data-duration="4:31">Ivy</option>
-            <option value="https://open.spotify.com/track/3MvYXJZRi2UjRFRF3hnvx5" data-name="Pink + White" data-duration="4:41">Pink + White</option>
-            <option value="https://open.spotify.com/track/6gY2xvCe0psi2BqFP60nJx" data-name="Skyline To" data-duration="4:56">Skyline To</option>
-            <option value="https://open.spotify.com/track/0m7vfQI7LIkqHHDzXA0YOJ" data-name="Self Control" data-duration="5:23">Self Control</option>
-            <option value="https://open.spotify.com/track/7D3g4xXQFjDlDq5VCR1v7C" data-name="Nights" data-duration="5:00">Nights</option>
+        <select id="track-select-album2" class="track-select" onchange="updateTrack('album2')">
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" data-name="Neon Nights" data-artist="Various Artists" data-duration="4:34">Neon Nights</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" data-name="Cosmic Dance" data-artist="Various Artists" data-duration="4:31">Cosmic Dance</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" data-name="Urban Pulse" data-artist="Various Artists" data-duration="4:41">Urban Pulse</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3" data-name="Retro Vibes" data-artist="Various Artists" data-duration="4:56">Retro Vibes</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3" data-name="Electric Feel" data-artist="Various Artists" data-duration="5:23">Electric Feel</option>
+            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3" data-name="Midnight Echo" data-artist="Various Artists" data-duration="5:00">Midnight Echo</option>
         </select>
 
         <div class="track-info">
-            <strong id="track-name-blonde">Nikes</strong><br>
-            <span id="track-duration-blonde">4:34</span>
+            <strong id="track-name-album2">Neon Nights</strong><br>
+            <span id="track-artist-album2">Various Artists</span>
         </div>
 
-        <a class="spotify-button" id="spotify-link-blonde" href="https://open.spotify.com/track/0e7IGfKKbEKPBF2LqURccL" target="_blank">
-            🎧 Listen on Spotify
-        </a>
+        <div class="player-controls">
+            <audio id="audio-player-album2" controls></audio>
+            
+            <div class="progress-bar">
+                <div id="progress-fill-album2" class="progress-fill"></div>
+            </div>
+            
+            <div class="time-display">
+                <span id="current-time-album2">0:00</span> / <span id="duration-album2">0:00</span>
+            </div>
+
+            <div class="button-group">
+                <button onclick="playTrack('album2')">▶ Play</button>
+                <button onclick="pauseTrack('album2')">⏸ Pause</button>
+                <button class="download-btn" onclick="downloadTrack('album2')">⬇ Download</button>
+            </div>
+        </div>
 
         <div class="info">
-            💚 Official track links powered by Spotify
+            🎵 Play, download, and enjoy royalty-free music
         </div>
     </div>
 </div>
@@ -255,22 +320,75 @@
         const select = document.getElementById(selectId);
         const selectedOption = select.options[select.selectedIndex];
         
-        const spotifyUrl = selectedOption.value;
+        const trackUrl = selectedOption.value;
         const trackName = selectedOption.dataset.name;
-        const duration = selectedOption.dataset.duration;
+        const artist = selectedOption.dataset.artist;
         
         // Update track info
         document.getElementById(`track-name-${album}`).textContent = trackName;
-        document.getElementById(`track-duration-${album}`).textContent = duration;
+        document.getElementById(`track-artist-${album}`).textContent = artist;
         
-        // Update Spotify link
-        document.getElementById(`spotify-link-${album}`).href = spotifyUrl;
+        // Load audio
+        const audioPlayer = document.getElementById(`audio-player-${album}`);
+        audioPlayer.src = trackUrl;
+        
+        // Set up progress tracking
+        setupProgressTracking(album);
+    }
+
+    function playTrack(album) {
+        const audioPlayer = document.getElementById(`audio-player-${album}`);
+        audioPlayer.play();
+    }
+
+    function pauseTrack(album) {
+        const audioPlayer = document.getElementById(`audio-player-${album}`);
+        audioPlayer.pause();
+    }
+
+    function downloadTrack(album) {
+        const select = document.getElementById(`track-select-${album}`);
+        const selectedOption = select.options[select.selectedIndex];
+        const trackUrl = selectedOption.value;
+        const trackName = selectedOption.dataset.name;
+        
+        // Create a temporary link and trigger download
+        const link = document.createElement('a');
+        link.href = trackUrl;
+        link.download = `${trackName}.mp3`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    function setupProgressTracking(album) {
+        const audioPlayer = document.getElementById(`audio-player-${album}`);
+        const progressFill = document.getElementById(`progress-fill-${album}`);
+        const currentTimeDisplay = document.getElementById(`current-time-${album}`);
+        const durationDisplay = document.getElementById(`duration-${album}`);
+
+        audioPlayer.addEventListener('timeupdate', () => {
+            const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            progressFill.style.width = percent + '%';
+            currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
+        });
+
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            durationDisplay.textContent = formatTime(audioPlayer.duration);
+        });
+    }
+
+    function formatTime(seconds) {
+        if (!seconds || isNaN(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     }
 
     // Initialize on page load
     window.onload = () => {
-        updateTrack('channel');
-        updateTrack('blonde');
+        updateTrack('album1');
+        updateTrack('album2');
     };
 </script>
 
