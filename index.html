@@ -24,7 +24,7 @@
 
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 30px;
             max-width: 1200px;
             width: 100%;
@@ -41,7 +41,7 @@
 
         .player-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0px 15px 50px rgba(255, 107, 107, 0.3);
+            box-shadow: 0px 15px 50px rgba(29, 185, 84, 0.3);
         }
 
         .album-art {
@@ -91,49 +91,52 @@
         }
 
         .track-select:hover {
-            border-color: #ff6b6b;
+            border-color: #1db954;
         }
 
         .track-select:focus {
             outline: none;
-            border-color: #ff6b6b;
+            border-color: #1db954;
         }
 
-        audio {
+        .track-info {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .track-info strong {
+            color: #1db954;
+        }
+
+        .spotify-button {
             width: 100%;
-            margin-top: 15px;
-            height: 40px;
-        }
-
-        audio::-webkit-media-controls-panel {
-            background-color: #2a2a2a;
-        }
-
-        .controls {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        button {
-            flex: 1;
-            padding: 10px;
-            background: #ff6b6b;
+            padding: 12px;
+            background: #1db954;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 14px;
-            transition: background 0.3s ease;
+            text-transform: uppercase;
+            transition: background 0.3s ease, transform 0.2s ease;
+            margin-bottom: 10px;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        button:hover {
-            background: #ff5252;
+        .spotify-button:hover {
+            background: #1ed760;
+            transform: scale(1.02);
         }
 
-        button:active {
-            background: #e63946;
+        .spotify-button:active {
+            background: #1aa34a;
         }
 
         .info {
@@ -154,7 +157,7 @@
         .header h1 {
             font-size: 36px;
             margin-bottom: 10px;
-            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            background: linear-gradient(135deg, #1db954, #1ed760);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -164,6 +167,15 @@
             color: #aaa;
             font-size: 14px;
         }
+
+        a {
+            color: #1db954;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -171,115 +183,94 @@
 <div class="container">
     <div class="header">
         <h1>🎵 Frank Ocean Player</h1>
-        <p>Channel Orange & Blonde</p>
+        <p>Channel Orange & Blonde - Official Spotify Tracks</p>
     </div>
 
     <!-- CHANNEL ORANGE PLAYER -->
     <div class="player-card">
-        <img class="album-art" id="art-channel" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" alt="Channel Orange">
+        <img class="album-art" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" alt="Channel Orange">
         
-        <h2 id="song-title-channel">Thinkin Bout You</h2>
+        <h2>Channel Orange</h2>
         <p class="artist">Frank Ocean</p>
-        <p class="album">Channel Orange (2012)</p>
+        <p class="album">🎼 2012 - Def Jam</p>
 
-        <select id="track-select-channel" class="track-select" onchange="changeTrack('channel')">
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Thinkin Bout You</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Pink + White</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Novacane</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Super Rich Kids</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Pyramid</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3" data-album="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=400&h=400&fit=crop" data-artist="Frank Ocean">Sweet Life</option>
+        <select id="track-select-channel" class="track-select" onchange="updateTrack('channel')">
+            <option value="https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqV" data-name="Thinkin Bout You" data-duration="3:39">Thinkin Bout You</option>
+            <option value="https://open.spotify.com/track/0c6xIDDpzE81m2GFRMO6R8" data-name="Pink + White" data-duration="4:41">Pink + White</option>
+            <option value="https://open.spotify.com/track/1HEe2s59jJuChqRw0oMpAL" data-name="Novacane" data-duration="3:51">Novacane</option>
+            <option value="https://open.spotify.com/track/5Q6rlYaDUFJ53I35XDQQH8" data-name="Super Rich Kids" data-duration="3:16">Super Rich Kids</option>
+            <option value="https://open.spotify.com/track/1KPSTLI3SPbhEZlpP4Ld7i" data-name="Pyramid" data-duration="4:56">Pyramid</option>
+            <option value="https://open.spotify.com/track/0DiWzAFbZxrclsH5QTZt7G" data-name="Sweet Life" data-duration="3:21">Sweet Life</option>
         </select>
 
-        <audio id="audio-player-channel" controls></audio>
-
-        <div class="controls">
-            <button onclick="playPause('channel')">Play/Pause</button>
-            <button onclick="stopTrack('channel')">Stop</button>
+        <div class="track-info">
+            <strong id="track-name-channel">Thinkin Bout You</strong><br>
+            <span id="track-duration-channel">3:39</span>
         </div>
 
+        <a class="spotify-button" id="spotify-link-channel" href="https://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqV" target="_blank">
+            🎧 Listen on Spotify
+        </a>
+
         <div class="info">
-            <p>💿 Now Playing on Channel Orange Player</p>
+            💚 Official track links powered by Spotify
         </div>
     </div>
 
     <!-- BLONDE PLAYER -->
     <div class="player-card">
-        <img class="album-art" id="art-blonde" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" alt="Blonde">
+        <img class="album-art" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" alt="Blonde">
         
-        <h2 id="song-title-blonde">Nikes</h2>
+        <h2>Blonde</h2>
         <p class="artist">Frank Ocean</p>
-        <p class="album">Blonde (2016)</p>
+        <p class="album">🎼 2016 - Boys Don't Cry</p>
 
-        <select id="track-select-blonde" class="track-select" onchange="changeTrack('blonde')">
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Nikes</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Ivy</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Pink + White</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Skyline To</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Self Control</option>
-            <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3" data-album="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop" data-artist="Frank Ocean">Nights</option>
+        <select id="track-select-blonde" class="track-select" onchange="updateTrack('blonde')">
+            <option value="https://open.spotify.com/track/0e7IGfKKbEKPBF2LqURccL" data-name="Nikes" data-duration="4:34">Nikes</option>
+            <option value="https://open.spotify.com/track/7qiZfU4dY1lsylvNEprXjH" data-name="Ivy" data-duration="4:31">Ivy</option>
+            <option value="https://open.spotify.com/track/3MvYXJZRi2UjRFRF3hnvx5" data-name="Pink + White" data-duration="4:41">Pink + White</option>
+            <option value="https://open.spotify.com/track/6gY2xvCe0psi2BqFP60nJx" data-name="Skyline To" data-duration="4:56">Skyline To</option>
+            <option value="https://open.spotify.com/track/0m7vfQI7LIkqHHDzXA0YOJ" data-name="Self Control" data-duration="5:23">Self Control</option>
+            <option value="https://open.spotify.com/track/7D3g4xXQFjDlDq5VCR1v7C" data-name="Nights" data-duration="5:00">Nights</option>
         </select>
 
-        <audio id="audio-player-blonde" controls></audio>
-
-        <div class="controls">
-            <button onclick="playPause('blonde')">Play/Pause</button>
-            <button onclick="stopTrack('blonde')">Stop</button>
+        <div class="track-info">
+            <strong id="track-name-blonde">Nikes</strong><br>
+            <span id="track-duration-blonde">4:34</span>
         </div>
 
+        <a class="spotify-button" id="spotify-link-blonde" href="https://open.spotify.com/track/0e7IGfKKbEKPBF2LqURccL" target="_blank">
+            🎧 Listen on Spotify
+        </a>
+
         <div class="info">
-            <p>💿 Now Playing on Blonde Player</p>
+            💚 Official track links powered by Spotify
         </div>
     </div>
 </div>
 
 <script>
-    const players = {
-        channel: {
-            audio: document.getElementById('audio-player-channel'),
-            select: document.getElementById('track-select-channel'),
-            title: document.getElementById('song-title-channel'),
-            art: document.getElementById('art-channel')
-        },
-        blonde: {
-            audio: document.getElementById('audio-player-blonde'),
-            select: document.getElementById('track-select-blonde'),
-            title: document.getElementById('song-title-blonde'),
-            art: document.getElementById('art-blonde')
-        }
-    };
-
-    function changeTrack(album) {
-        const player = players[album];
-        const selectedOption = player.select.options[player.select.selectedIndex];
-        const url = selectedOption.value;
-        const albumUrl = selectedOption.dataset.album;
+    function updateTrack(album) {
+        const selectId = `track-select-${album}`;
+        const select = document.getElementById(selectId);
+        const selectedOption = select.options[select.selectedIndex];
         
-        player.audio.src = url;
-        player.title.innerText = selectedOption.text;
-        player.art.src = albumUrl;
-        player.audio.play();
+        const spotifyUrl = selectedOption.value;
+        const trackName = selectedOption.dataset.name;
+        const duration = selectedOption.dataset.duration;
+        
+        // Update track info
+        document.getElementById(`track-name-${album}`).textContent = trackName;
+        document.getElementById(`track-duration-${album}`).textContent = duration;
+        
+        // Update Spotify link
+        document.getElementById(`spotify-link-${album}`).href = spotifyUrl;
     }
 
-    function playPause(album) {
-        const audio = players[album].audio;
-        if (audio.paused) {
-            audio.play();
-        } else {
-            audio.pause();
-        }
-    }
-
-    function stopTrack(album) {
-        const audio = players[album].audio;
-        audio.pause();
-        audio.currentTime = 0;
-    }
-
-    // Load first tracks on start
+    // Initialize on page load
     window.onload = () => {
-        players.channel.audio.src = players.channel.select.value;
-        players.blonde.audio.src = players.blonde.select.value;
+        updateTrack('channel');
+        updateTrack('blonde');
     };
 </script>
 
